@@ -1,4 +1,5 @@
 //index.js
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
@@ -14,9 +15,10 @@ const passportConfig = require("./passport-config");
 mongoose.set("strictPopulate", false);
 
 mongoose
-  .connect(
-    "mongodb+srv://fluxfusiondevs:IarmvoocK5pnptRy@cluster0.wze203o.mongodb.net/TabLU"
-  )
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("MongoDB connected successfully");
     app.listen(port, () => {
